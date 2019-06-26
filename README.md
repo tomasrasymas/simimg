@@ -3,7 +3,7 @@
 SimImg is a set of tools used to find similar images. In this repo I am providing example using DeepFashion dataset. If you have image with some kind of outfit in it, you can search for similar ones by visual similarity.
 
 ## Pipeline
-* Every image in image dataset is converted to multidimensional feature vector (`pre-trained InceptionResNetV2`)
+* Every image in image dataset is converted to multidimensional feature vector (`pre-trained ResNet50`)
 * Source image is converted to same feature vector
 * Similarity between source image and every dataset images is calculated (`cosine similarity`)
 * Most similar images are selected as result
@@ -17,7 +17,7 @@ SimImg is a set of tools used to find similar images. In this repo I am providin
 * `generate_td_projector_data.py` - generates tensorboard projector files two view feature vectors in thier embeddings space (`data/projector/`) 
  
 ## Image embeddings
-Output of pre-trained model: `InceptionResNetV2(weights='imagenet', include_top=False, pooling='avg')`
+Output of pre-trained model: `ResNet50(weights='imagenet', include_top=False, pooling='avg')`
 
 ## TensorBoard projector
 It is very resource intensive task. Be careful when selecting number of images to add to projector, cause in order to use TB projector all images are merged into singe montage image. 
