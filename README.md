@@ -44,8 +44,6 @@ python search.py --num 20
 
 Search result is similar images merged into single montage image, keeping source image the first one.
 ### Sample 1
-Source
-
 ![source_1](docs/sample_1_source.jpg)
 ![results_1](docs/sample_1_results.png)
 
