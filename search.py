@@ -12,9 +12,10 @@ config = get_config()
 
 
 class SimilarSearch:
-    def __init__(self):
+    def __init__(self, distance):
         self.img_2_vec = Img2Vec()
         self.data = None
+        self.distance = distance
 
     def load(self):
         print('Loading %s' % datetime.datetime.now())
@@ -29,7 +30,15 @@ class SimilarSearch:
 
         vec = self.img_2_vec.get_vector(image=image)
 
-        distances = np.array([[helpers.cosine_similarity(vec, d[1])] for d in self.data])
+        if self.distance == 'cosine':
+            distances = np.array([[helpers.cosine_similarity(vec, d[1])] for d in self.data])
+        elif self.distance == 'euclidean':
+            distances = np.array([[helpers.euclidean_similarity(vec, d[1])] for d in self.data])
+        elif self.distance == 'minkowski':
+            distances = np.array([[helpers.minkowski_similarity(vec, d[1])] for d in self.data])
+        else:
+            distances = np.array([[helpers.cosine_similarity(vec, d[1])] for d in self.data])
+
         data_with_distances = np.hstack((self.data, distances))
         data_with_distances = data_with_distances[data_with_distances[:, 2].argsort()]
 
@@ -51,6 +60,8 @@ if __name__ == '__main__':
                                      formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument('-n', '--num', dest='similar_num', type=int, required=False, metavar='',
                         help='Number of similar images to find', default=10)
+    parser.add_argument('-d', '--distance', dest='distance', type=str, required=False, metavar='',
+                        help='Distance algorithm: cosine | euclidean | minkowski', default='cosine')
 
     args = parser.parse_args()
 
@@ -60,7 +71,7 @@ if __name__ == '__main__':
 
     print('*' * 50)
 
-    search = SimilarSearch()
+    search = SimilarSearch(args.distance)
     search.load()
 
     while True:

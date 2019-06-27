@@ -124,6 +124,14 @@ def cosine_similarity(vec1, vec2):
     return 1 - spatial.distance.cosine(vec1, vec2)
 
 
+def minkowski_similarity(vec1, vec2):
+    return spatial.distance.minkowski(vec1, vec2)
+
+
+def euclidean_similarity(vec1, vec2):
+    return spatial.distance.euclidean(vec1, vec2)
+
+
 def create_path_if_not_exists(folder_path):
     if not os.path.isdir(folder_path):
         os.makedirs(folder_path)
