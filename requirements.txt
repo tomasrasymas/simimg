@@ -24,7 +24,7 @@ opencv-contrib-python==4.1.0.25
 opencv-python==4.1.0.25
 pandas==0.24.2
 Pillow==6.0.0
-protobuf==3.7.1
+protobuf==3.15.0
 pybind11==2.2.4
 pydot==1.4.1
 pyparsing==2.4.0
